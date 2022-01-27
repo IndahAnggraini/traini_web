@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class PenulisController extends Controller
 {
+
+
     public function index(){
         return view('penulis.artikel_tulis');
     }
@@ -66,7 +68,13 @@ class PenulisController extends Controller
                 // 'tgl_terbit' => $data['tgl_terbit']
             ]);
 
-            $details = [
+
+            // $details = [
+            //     'judul' => $berita->judul,
+            //     'status' =>$berita->status
+            // ];
+
+             $details = [
                 'judul' => $berita->judul,
                 'status' =>$berita->status
             ];
