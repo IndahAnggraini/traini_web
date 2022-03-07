@@ -1,211 +1,282 @@
 @extends('layouts.lay_berita')
 
+@section('css')
+<link rel="stylesheet" href="/assets/css/aos.css">
+<link rel="stylesheet" href="/assets/css/datatables.min.css">
+<link rel="stylesheet" href="/assets/css/slick-loader.min.css">
+<link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
+<link rel="stylesheet" href="/assets/css/toastr.min.css">
+
+<style>
+    /* CSS LIBRARY SWIPPER */
+    .swiper {
+        width: 600px;
+        height: 300px;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    body{
+        margin: 0;
+        padding: 0;
+    }
+    .bagian1 {
+        margin-left: 42px;
+        height: 300px;
+        /* background-color: burlywood; */
+        width: 66%;
+        float: left;
+    }
+    .bagian1 .kata1 h4{
+        /* text-decoration: underline; */
+        /* border-bottom: 5px solid blue; */
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        font-size: 20px;
+    }
+    .bagian1 .foto1{
+        border: 1px solid #ccc;
+        width: 240px;
+        float: left;
+        margin-right: 35px;
+        text-decoration: none;
+        color: black;
+    }
+    .bagian1 .desc a:link{
+        text-decoration: none;
+        color: black;
+    }
+    .bagian1 .foto1:hover{
+        border: 1px solid #777;
+    }
+    .bagian1 .foto1 img {
+        width: 100%;
+    }
+    .bagian2{
+        margin-right: 35px;
+        height: 300px;
+        /* background-color: burlywood; */
+        width: 20%;
+        /* display: inline-block; */
+        float: right;
+    }
+    .bagian2 .kata2 h4{
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        font-size: 20px;
+    }
+    .bagian2 .foto1{
+        width: 250px;
+        margin-top: 21px;
+        border: 1px solid #ccc;
+        /* width: 100px; */
+        /* float: right; */
+    }
+    .bagian2 .desc a:link{
+        text-decoration: none;
+        color: black;
+    }
+    .bagian2 .foto1:hover{
+        border: 1px solid #777;
+    }
+    .bagian2 .foto1 img {
+        width: 100%;
+    }
+    .bagian3 {
+        margin-left: 42px;
+        height: 220px;
+        /* background-color: cadetblue; */
+        width: 66%;
+        float: left;
+    }
+    .bagian3 .kata11 h4{
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        font-size: 20px;
+    }
+    .bagian3 .foto2{
+        width: 150px;
+        margin-top: 14px;
+        border: 1px solid #ccc;
+        float: left;
+    }
+    .bagian3 .foto2:hover{
+        border: 1px solid #777;
+    }
+    .bagian3 .foto2 img {
+        width: 100%;
+        vertical-align: baseline;
+    }
+    .bagian3 .teks a:link{
+        margin-top: 28px;
+        height: 100px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 25px;
+        text-decoration: none;
+        color: black;
+    }
+    .bagian3 .teks .tekskecil{
+        /* list-style-type: none; */
+        color: blue;
+        margin-left: 42px;
+        font-size: 14px;
+        margin-top: 42px;
+    }
+    .bagian4{
+        margin-left: 42px;
+        height: 200px;
+        /* background-color: gray; */
+        width: 66%;
+        float: left;
+    }
+    .bagian4 .foto3{
+        width: 150px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        float: left;
+    }
+    .bagian4 .foto3:hover{
+        border: 1px solid #777;
+    }
+    .bagian4 .foto3 img {
+        width: 100%;
+        vertical-align: baseline;
+    }
+    .bagian4 .teks1 a:link{
+        margin-top: 70px;
+        height: 100px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 25px;
+        text-decoration: none;
+        color: black;
+    }
+    .bagian4 .teks1 .tekskecil1{
+        color: red;
+        margin-left: 42px;
+        font-size: 14px;
+        margin-top: 42px;
+    }
+    .bagian5{
+        margin-left: 42px;
+        height: 200px;
+        /* background-color: gray; */
+        width: 66%;
+        float: left;
+    }
+    .bagian5 .foto4{
+        width: 150px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        float: left;
+    }
+    .bagian5 .foto4:hover{
+        border: 1px solid #777;
+    }
+    .bagian5 .foto4 img {
+        width: 100%;
+        vertical-align: baseline;
+    }
+    .bagian5 .teks2 a:link{
+        margin-top: 70px;
+        height: 100px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 25px;
+        text-decoration: none;
+        color: black;
+    }
+    .bagian5 .teks2 .tekskecil2{
+        color: red;
+        margin-left: 42px;
+        font-size: 14px;
+        margin-top: 42px;
+    }
+     .clear::after{
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+</style>
+@endsection
+
 {{-- section dan endsection berfungsi untuk mengurutkan tampilan seprti letak header dan body --}}
 @section('konten')
-<html>
-    <head>
-        <style>
-            body{
-                margin: 0;
-                padding: 0;
-            }
-            .bagian1 {
-                margin-left: 42px;
-                height: 300px;
-                /* background-color: burlywood; */
-                width: 66%;
-                float: left;
-            }
-            .bagian1 .kata1 h4{
-                /* text-decoration: underline; */
-                /* border-bottom: 5px solid blue; */
-                border-bottom-style: solid;
-                border-bottom-width: thin;
-                font-size: 20px;
-            }
-            .bagian1 .foto1{
-                border: 1px solid #ccc;
-                width: 240px;
-                float: left;
-                margin-right: 35px;
-                text-decoration: none;
-                color: black;
-            }
-            .bagian1 .desc a:link{
-                text-decoration: none;
-                color: black;
-            }
-            .bagian1 .foto1:hover{
-                border: 1px solid #777;
-            }
-            .bagian1 .foto1 img {
-                width: 100%;
-            }
-            .bagian2{
-                margin-right: 35px;
-                height: 300px;
-                /* background-color: burlywood; */
-                width: 20%;
-                /* display: inline-block; */
-                float: right;
-            }
-            .bagian2 .kata2 h4{
-                border-bottom-style: solid;
-                border-bottom-width: thin;
-                font-size: 20px;
-            }
-            .bagian2 .foto1{
-                width: 250px;
-                margin-top: 21px;
-                border: 1px solid #ccc;
-                /* width: 100px; */
-                /* float: right; */
-            }
-            .bagian2 .desc a:link{
-                text-decoration: none;
-                color: black;
-            }
-            .bagian2 .foto1:hover{
-                border: 1px solid #777;
-            }
-            .bagian2 .foto1 img {
-                width: 100%;
-            }
-            .bagian3 {
-                margin-left: 42px;
-                height: 220px;
-                /* background-color: cadetblue; */
-                width: 66%;
-                float: left;
-            }
-            .bagian3 .kata11 h4{
-                border-bottom-style: solid;
-                border-bottom-width: thin;
-                font-size: 20px;
-            }
-            .bagian3 .foto2{
-                width: 150px;
-                margin-top: 14px;
-                border: 1px solid #ccc;
-                float: left;
-            }
-            .bagian3 .foto2:hover{
-                border: 1px solid #777;
-            }
-            .bagian3 .foto2 img {
-                width: 100%;
-                vertical-align: baseline;
-            }
-            .bagian3 .teks a:link{
-                margin-top: 28px;
-                height: 100px;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 25px;
-                text-decoration: none;
-                color: black;
-            }
-            .bagian3 .teks .tekskecil{
-                /* list-style-type: none; */
-                color: blue;
-                margin-left: 42px;
-                font-size: 14px;
-                margin-top: 42px;
-            }
-            .bagian4{
-                margin-left: 42px;
-                height: 200px;
-                /* background-color: gray; */
-                width: 66%;
-                float: left;
-            }
-            .bagian4 .foto3{
-                width: 150px;
-                margin-top: 5px;
-                border: 1px solid #ccc;
-                float: left;
-            }
-            .bagian4 .foto3:hover{
-                border: 1px solid #777;
-            }
-            .bagian4 .foto3 img {
-                width: 100%;
-                vertical-align: baseline;
-            }
-            .bagian4 .teks1 a:link{
-                margin-top: 70px;
-                height: 100px;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 25px;
-                text-decoration: none;
-                color: black;
-            }
-            .bagian4 .teks1 .tekskecil1{
-                color: red;
-                margin-left: 42px;
-                font-size: 14px;
-                margin-top: 42px;
-            }
-            .bagian5{
-                margin-left: 42px;
-                height: 200px;
-                /* background-color: gray; */
-                width: 66%;
-                float: left;
-            }
-            .bagian5 .foto4{
-                width: 150px;
-                margin-top: 5px;
-                border: 1px solid #ccc;
-                float: left;
-            }
-            .bagian5 .foto4:hover{
-                border: 1px solid #777;
-            }
-            .bagian5 .foto4 img {
-                width: 100%;
-                vertical-align: baseline;
-            }
-            .bagian5 .teks2 a:link{
-                margin-top: 70px;
-                height: 100px;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 25px;
-                text-decoration: none;
-                color: black;
-            }
-            .bagian5 .teks2 .tekskecil2{
-                color: red;
-                margin-left: 42px;
-                font-size: 14px;
-                margin-top: 42px;
-            }
-             .clear::after{
-                content: "";
-                clear: both;
-                display: table;
-            }
 
-        </style>
-    </head>
+{{-- SWIPPER --}}
 
-    <body>
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img class="lazy" src="/assets/img/Spinner.gif" data-src="/assets/img/b.jpg" alt="Bola" width="500"></div>
+      <div class="swiper-slide"><img src="/assets/img/2.png" alt="Bola" width="500"></div>
+      <div class="swiper-slide"><img src="/assets/img/b.jpg" alt="Bola" width="500"></div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+{{-- <!-- Slider main container -->
+<div class="swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      ...
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+  </div> --}}
+
         <div class="bagian1">
 
+            {{-- data dokumentasi aos masukkan di class kata1 --}}
             <div class="kata1">
                     <h4>SOROTAN</h4>
             </div>
 
-            <div class="foto1">
+            <div class="foto1" data-aos="fade-up">
             <a target="_blank" href="bola.jpg">
-                <img src="/assets/img/bola.jpg" alt="Bola" width="300" height="133">
+                <img class="lazy" src="/assets/img/Spinner.gif" data-src="/assets/img/b.jpg" alt="Bola" width="500">
             </a>
 
             <div class="desc">
             <a href="default.asp" target="_blank">Thailand Vs Indonesia: Egy Maulana Vikri Cetak Gol, Skor Imbang 2-2</a>
-        </div>
+            </div>
         </div>
 
-        <div class="foto1">
+        <div class="foto1" data-aos="flip-up">
             <a target="_blank" href="2.png">
                 <img src="/assets/img/2.png" alt="2" width="300" height="133">
             </a>
@@ -215,7 +286,7 @@
             </div>
         </div>
 
-        <div class="foto1">
+        <div class="foto1" data-aos="flip-down">
             <a target="_blank" href="b.jpg">
                 <img src="/assets/img/b.jpg" alt="b" width="300" height="133">
             </a>
@@ -301,7 +372,63 @@
         </div>
 
         <div class="clear"></div>
+@endsection
 
-    </body>
-</html>
+@section('script')
+<script src="/assets/js/aos.js"></script>
+<script src="/assets/js/datatables.min.js"></script>
+<script src="/assets/js/lazyload.min.js"></script>
+<script src="/assets/js/swiper-bundle.min.js"></script>
+<script src="/assets/js/toastr.min.js"></script>
+<script src="/assets/js/slick-loader.min.js"></script>
+<script>
+    const App = {
+        data() {
+            return {
+
+            }
+        },
+        mounted() {
+            AOS.init();
+
+            // lazyload utk menambahkan settingan
+            var lazyLoadInstance = new LazyLoad({
+            // Your custom settings go here
+            });
+
+                var swiper = new Swiper(".mySwiper", {
+                navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+                },
+            });
+
+            // SLICKLOADER = SEBAGAI LOADING
+            Slickloader.enable();
+            Slickloader.disable();
+
+            // Display a warning toast, with no title
+            // toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
+
+            // // Display a success toast, with a title
+            // toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+
+            // // Display an error toast, with a title
+            // toastr.error('I do not think that word means what you think it means.', 'Inconceivable!')
+
+            // // Immediately remove current toasts without using animation
+            // toastr.remove()
+
+            // // Remove current toasts using animation
+            // toastr.clear()
+
+            // // Override global options
+            // toastr.success('We do have the Kapua suite available.', 'Turtle Bay Resort', {timeOut: 5000})
+        },
+        methods: {
+
+        }
+    }
+Vue.createApp(App).mount('#app');
+</script>
 @endsection

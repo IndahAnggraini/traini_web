@@ -1,5 +1,6 @@
 <html>
     <head>
+
         <style>
             body{
                 margin: 0;
@@ -215,9 +216,13 @@
             }
 
         </style>
-    </head>
+        @yield('css')
+</head>
 
-    <body>
+
+
+<body>
+<div id="app">
 
     <div class="head1" style="margin-top: 17px; margin-bottom: 0px;">
             <ul class="ull">
@@ -513,6 +518,16 @@
 
             </div>
         </div>
+    </div>
+
+
+        <!-- jQuery harus paling atas -->
+<script src="/assets/AdminLTE-master/plugins/jquery/jquery.min.js"></script>
+<script src="/assets/js/vue3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.js"></script>
+
+{{-- script harus di paling bawah --}}
+@yield('script')
 
     </body>
 </html>

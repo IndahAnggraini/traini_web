@@ -14,7 +14,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0">
-      <table class="table table-striped">
+      <table id="example" class="table table-striped table-bordered">
         <thead>
           <tr>
             <th style="width: 10px">#</th>
@@ -65,7 +65,17 @@
   </div>
 @endsection
 
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="/assets/css/toastr.min.css">
+<link rel="stylesheet" href="/assets/css/slick-loader.min.css">
+@endsection
+
 @section('script')
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/assets/js/toastr.min.js"></script>
+<script src="/assets/js/slick-loader.min.js"></script>
 <script>
 const App = {
     data() {
@@ -76,16 +86,24 @@ const App = {
     },
     mounted() {
         this.viewData();
+
     },
     unmounted() {
 
     },
     methods: {
         viewData(){
+            SlickLoader.enable();
+            $('#example').DataTable().destroy();
             axios.get('/semua-artikel-fetch')
                 .then(r => {
                     console.log("sukses");
                     this.list_berita = r.data;
+                    setTimeout(function() {
+                        $('#example').DataTable();
+                        SlickLoader.disable();
+                        toastr.success('Have fun storming the castle!', 'Sukses');
+                    }, 3000);
                     console.log(this.list_berita);
                 });
         },
@@ -97,6 +115,7 @@ const App = {
                 .then(r => {
                     console.log(r.data);
                     this.viewData();
+                    toastr.warning('Have fun storming the castle!', 'Warning');
                 });
         },
         editBerita(item){
